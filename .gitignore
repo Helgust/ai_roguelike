@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+w1/
+hw1/x64
+hw1/.vs
