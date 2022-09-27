@@ -67,30 +67,6 @@ static void on_closest_enemy_pos(flecs::world &ecs, flecs::entity entity, Callab
   });
 }
 
-template<typename Callable>
-static void on_player_pos(flecs::world& ecs, flecs::entity entity, Callable c)
-{
-  static auto playerQuery = ecs.query<const Position, const IsPlayer>();
-  entity.set([&](const Position& pos, Action& a)
-  {
-    flecs::entity closePlayer;
-    float closestDist = FLT_MAX;
-    Position closestPos;
-    playerQuery.each([&](flecs::entity player, const Position& ppos, const IsPlayer& tag)
-      {
-        float curDist = dist(ppos, pos);
-        if (curDist < closestDist)
-        {
-          closestDist = curDist;
-          closestPos = ppos;
-          closePlayer = player;
-        }
-      });
-    if (ecs.is_valid(closePlayer))
-      c(a, pos, closestPos);
-  });
-}
-
 class MoveToEnemyState : public State
 {
 public:
@@ -101,34 +77,6 @@ public:
     on_closest_enemy_pos(ecs, entity, [&](Action &a, const Position &pos, const Position &enemy_pos)
     {
       a.action = move_towards(pos, enemy_pos);
-    });
-  }
-};
-
-class MoveToPlayerState : public State
-{
-public:
-  void enter(flecs::world& ecs, flecs::entity entity) const override {}
-  void exit(flecs::world& ecs, flecs::entity entity) const override {}
-  void act(float/* dt*/, flecs::world& ecs, flecs::entity entity) const override
-  {
-      on_player_pos(ecs, entity, [&](Action& a, const Position& pos, const Position& player_pos)
-      {
-        a.action = move_towards(pos, player_pos);
-      });
-  }
-};
-
-class IdleState : public State
-{
-public:
-  void enter(flecs::world& ecs, flecs::entity entity) const override {}
-  void exit(flecs::world& ecs, flecs::entity entity) const override {}
-  void act(float/* dt*/, flecs::world& ecs, flecs::entity entity) const override
-  {
-    entity.set([&](Action& a)
-    {
-      a.action = EA_NOP;
     });
   }
 };
@@ -173,37 +121,6 @@ public:
       {
           a.action = EA_HEAL;
       });
-  }
-};
-
-class HealingPlayerState : public State
-{
-public:
-  HealingPlayerState() {}
-  void enter(flecs::world& ecs, flecs::entity entity) const override
-  {
-    static auto playerQuery = ecs.query<Color, OriginalColor, const IsPlayer>();
-    playerQuery.each([&](Color& cur_color, OriginalColor& orig_color, const IsPlayer)
-      {
-        cur_color.color = 0xff00ff00;
-      });
-  }
-  void exit(flecs::world& ecs, flecs::entity entity) const override
-  {
-    static auto playerQuery = ecs.query<Color, OriginalColor, Action,  const IsPlayer>();
-    playerQuery.each([&](Color& cur_color, OriginalColor& orig_color, Action& a, const IsPlayer)
-    {
-        cur_color.color = orig_color.color;
-        a.action = EA_NOP;
-    });
-  }
-  void act(float/* dt*/, flecs::world& ecs, flecs::entity entity) const override
-  {
-    static auto playerQuery = ecs.query<const IsPlayer, Hitpoints>();
-    playerQuery.each([&](const IsPlayer, Hitpoints& hp)
-    {
-        hp.hitpoints += 20;
-    });
   }
 };
 
@@ -260,28 +177,6 @@ public:
   }
 };
 
-class PlayerAvailableTransition : public StateTransition
-{
-  float triggerDist;
-public:
-  PlayerAvailableTransition(float in_dist) : triggerDist(in_dist) {}
-  bool isAvailable(flecs::world& ecs, flecs::entity entity) const override
-  {
-    static auto playerQuery = ecs.query<const Position, const IsPlayer>();
-    bool playerFound = false;
-    entity.get([&](const Position& pos, const IsPlayer& tag)
-      {
-        playerQuery.each([&](flecs::entity player, const Position& ppos, const IsPlayer& tag)
-          {
-            float curDist = dist(ppos, pos);
-            playerFound |= curDist <= triggerDist;
-          });
-      });
-    return playerFound;
-  }
-};
-
-
 class HitpointsLessThanTransition : public StateTransition
 {
   float threshold;
@@ -294,24 +189,6 @@ public:
     {
       hitpointsThresholdReached |= hp.hitpoints < threshold;
     });
-    return hitpointsThresholdReached;
-  }
-};
-
-class PlayerHitpointsLessThanTransition : public StateTransition
-{
-  float threshold;
-public:
-  PlayerHitpointsLessThanTransition(float in_thres) : threshold(in_thres) {}
-  bool isAvailable(flecs::world& ecs, flecs::entity entity) const override
-  {
-    bool hitpointsThresholdReached = false;
-    static auto playerQuery = ecs.query<const Hitpoints, const IsPlayer>();
-    playerQuery.each([&](const Hitpoints& hp, const IsPlayer& tag)
-      {
-        hitpointsThresholdReached |= hp.hitpoints < threshold;
-      });
-
     return hitpointsThresholdReached;
   }
 };
@@ -383,16 +260,6 @@ State *create_move_to_enemy_state()
   return new MoveToEnemyState();
 }
 
-State* create_move_to_player_state()
-{
-  return new MoveToPlayerState();
-}
-
-State* create_idle_state()
-{
-  return new IdleState();
-}
-
 State *create_flee_from_enemy_state()
 {
   return new FleeFromEnemyState();
@@ -401,11 +268,6 @@ State *create_flee_from_enemy_state()
 State* create_healing_state()
 {
   return new HealingState();
-}
-
-State* create_healing_ally_state()
-{
-  return new HealingPlayerState();
 }
 
 
@@ -425,11 +287,6 @@ StateTransition *create_enemy_available_transition(float dist)
   return new EnemyAvailableTransition(dist);
 }
 
-StateTransition* create_player_available_transition(float dist)
-{
-  return new PlayerAvailableTransition(dist);
-}
-
 StateTransition *create_enemy_reachable_transition()
 {
   return new EnemyReachableTransition();
@@ -438,11 +295,6 @@ StateTransition *create_enemy_reachable_transition()
 StateTransition *create_hitpoints_less_than_transition(float thres)
 {
   return new HitpointsLessThanTransition(thres);
-}
-
-StateTransition* create_player_hitpoints_less_than_transition(float thres)
-{
-  return new PlayerHitpointsLessThanTransition(thres);
 }
 
 StateTransition* create_cooldown_transition()
