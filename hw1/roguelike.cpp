@@ -8,6 +8,34 @@
 //for scancodes
 #include <GLFW/glfw3.h>
 
+static void add_guerd_sm(flecs::entity entity) //guard behavior
+{
+  entity.get([](StateMachine& sm)
+    {
+      //idle
+      int idle = sm.addState(create_idle_state());
+      //moveToPlayer
+      int moveToPlayer = sm.addState(create_move_to_player_state());
+      //moveToEnemy
+      int moveToEnemy = sm.addState(create_move_to_enemy_state());
+      //Heal
+      int heal = sm.addState(create_healing_ally_state());
+
+      sm.addTransition(create_player_available_transition(1.f), moveToPlayer, idle);
+      sm.addTransition(create_negate_transition(create_player_available_transition(100.f)), idle, moveToPlayer);
+
+      sm.addTransition(create_enemy_available_transition(3.f), idle, moveToEnemy);
+      sm.addTransition(create_enemy_available_transition(3.f), moveToPlayer, moveToEnemy);
+      sm.addTransition(create_negate_transition(create_player_available_transition(5.f)), moveToEnemy, moveToPlayer);
+
+      //player heal less and cooldown and near
+      //sm.addTransition(create_player_hitpoints_less_than_transition(60.f), moveToPlayer, heal);
+      sm.addTransition(create_and_transition(create_player_hitpoints_less_than_transition(60.f),create_cooldown_transition()),
+        moveToPlayer, heal);
+      sm.addTransition(create_negate_transition(create_cooldown_transition()), heal, moveToPlayer);
+    });
+}
+
 static void add_patrol_attack_sm(flecs::entity entity) //berserk behavior
 {
   entity.get([](StateMachine& sm)
@@ -90,18 +118,18 @@ static void add_attack_sm(flecs::entity entity)
   });
 }
 
-static flecs::entity create_monster(flecs::world &ecs, int x, int y, uint32_t color)
+static flecs::entity create_monster(flecs::world &ecs, int x, int y, uint32_t color, int team)
 {
   return ecs.entity()
     .set(Position{x, y})
     .set(MovePos{x, y})
     .set(PatrolPos{x, y})
-    .set(Hitpoints{20.f})
+    .set(Hitpoints{80.f})
     .set(Action{EA_NOP})
     .set(Color{color})
     .set(OriginalColor{color})
     .set(StateMachine{})
-    .set(Team{1})
+    .set(Team{team})
     .set(NumActions{1, 0})
     .set(MeleeDamage{20.f})
     .set(HealingCooldown{ 10 });
@@ -112,7 +140,7 @@ static void create_player(flecs::world &ecs, int x, int y)
   ecs.entity("player")
     .set(Position{x, y})
     .set(MovePos{x, y})
-    .set(Hitpoints{100.f})
+    .set(Hitpoints{20.f})
     .set(Color{0xffeeeeee})
     .set(OriginalColor{0xffeeeeee})
     .set(Action{EA_NOP})
@@ -120,7 +148,8 @@ static void create_player(flecs::world &ecs, int x, int y)
     .set(Team{0})
     .set(PlayerInput{})
     .set(NumActions{2, 0})
-    .set(MeleeDamage{50.f});
+    .set(MeleeDamage{50.f})
+    .set(HealingCooldown{ 10 });
 }
 
 static void create_heal(flecs::world &ecs, int x, int y, float amount)
@@ -186,12 +215,16 @@ static void register_roguelike_systems(flecs::world &ecs)
 
 void init_roguelike(flecs::world &ecs)
 {
+  ecs.set<flecs::Rest>({});
   register_roguelike_systems(ecs);
 
   //add_patrol_attack_flee_sm(create_monster(ecs, 5, 5, 0xffee00ee));
   //add_patrol_attack_flee_sm(create_monster(ecs, 10, -5, 0xffee00ee));
-  add_patrol_attack_flee_healing_sm(create_monster(ecs, -5, -5, 0xff111111));
+  //add_patrol_attack_flee_healing_sm(create_monster(ecs, -5, -5, 0xff111111));
   //add_attack_sm(create_monster(ecs, -5, 5, 0xff00ff00));
+  add_guerd_sm(create_monster(ecs, 10, -5, 0xffFF0000, 0));
+  //add_patrol_attack_flee_sm(create_monster(ecs, 5, 5, 0xff0000FF, 1));
+  
 
   create_player(ecs, 0, 0);
 
