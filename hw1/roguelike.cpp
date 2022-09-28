@@ -44,7 +44,8 @@ static void add_patrol_attack_sm(flecs::entity entity) //berserk behavior
       int moveToEnemy = sm.addState(create_move_to_enemy_state());
 
       sm.addTransition(create_enemy_available_transition(3.f), patrol, moveToEnemy);
-      sm.addTransition(create_negate_transition(create_enemy_available_transition(5.f)), moveToEnemy, patrol);
+      sm.addTransition(create_and_transition(create_negate_transition(create_enemy_available_transition(5.f)), 
+        create_negate_transition(create_hitpoints_less_than_transition(60.f))), moveToEnemy, patrol);
     });
 }
 
