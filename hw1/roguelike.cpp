@@ -223,8 +223,9 @@ void init_roguelike(flecs::world &ecs)
   //add_patrol_attack_flee_sm(create_monster(ecs, 10, -5, 0xffee00ee));
   //add_patrol_attack_flee_healing_sm(create_monster(ecs, -5, -5, 0xff111111));
   //add_attack_sm(create_monster(ecs, -5, 5, 0xff00ff00));
-  add_guerd_sm(create_monster(ecs, 10, -5, 0xffFF0000, 0));
-  //add_patrol_attack_flee_sm(create_monster(ecs, 5, 5, 0xff0000FF, 1));
+  add_guerd_sm(create_monster(ecs, -10, -5, 0xffFF0000, 0));//guard
+  add_patrol_attack_sm(create_monster(ecs, 5, 5, 0xff0000FF, 1));//berserk
+  add_patrol_attack_flee_healing_sm(create_monster(ecs, 10, -5, 0xff00EEFF, 1));//healer
   
 
   create_player(ecs, 0, 0);
