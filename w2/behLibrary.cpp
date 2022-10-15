@@ -51,6 +51,54 @@ struct Selector : public CompoundNode
   }
 };
 
+struct Not : public CompoundNode
+{
+  BehResult update(flecs::world &ecs, flecs::entity entity, Blackboard &bb) override
+  {
+    for (BehNode *node : nodes)
+    {
+      BehResult res = node->update(ecs, entity, bb);
+      if (res == BEH_FAIL)
+        return BEH_SUCCESS;
+      if (res == BEH_SUCCESS)
+        return BEH_FAIL;
+      if (res == BEH_RUNNING)
+        break;
+    }
+    return BEH_FAIL;
+  }
+};
+
+struct Or: public CompoundNode
+{
+  BehResult update(flecs::world &ecs, flecs::entity entity, Blackboard &bb) override
+  {
+    for (BehNode *node : nodes)
+    {
+      BehResult res = node->update(ecs, entity, bb);
+      if (res == BEH_RUNNING)
+        return res;
+      if(res == BEH_SUCCESS)
+        return res;
+    }
+    return BEH_FAIL;
+  }
+};
+
+struct Parallel: public CompoundNode
+{
+  BehResult update(flecs::world &ecs, flecs::entity entity, Blackboard &bb) override
+  {
+    for (BehNode *node : nodes)
+    {
+      BehResult res = node->update(ecs, entity, bb);
+      if (res != BEH_RUNNING)
+        return res;
+    }
+    return BEH_RUNNING;
+  }
+};
+
 struct MoveToEntity : public BehNode
 {
   size_t entityBb = size_t(-1); // wraps to 0xff...
