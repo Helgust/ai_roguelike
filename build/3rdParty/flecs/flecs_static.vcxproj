@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{22AA55C2-BBBA-3D79-B7A3-D41349D4715A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>flecs_static</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">W:\MIPT\ai_roguelike\build\3rdParty\flecs\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">flecs_static.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">flecs_static</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">W:\MIPT\ai_roguelike\build\3rdParty\flecs\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">flecs_static.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">flecs_static</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">W:\MIPT\ai_roguelike\build\3rdParty\flecs\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">flecs_static.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">flecs_static</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">W:\MIPT\ai_roguelike\build\3rdParty\flecs\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">flecs_static.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">flecs_static</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /w14242 /w14254 /w14263 /w14265 /w14287 /w14296 /w14311 /w14545 /w14546 /w14547 /w14549 /w14555 /w14619 /w14640 /w14826 /w14905 /w14906 /w14928</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatSpecificWarningsAsErrors>4289</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;flecs_STATIC;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;flecs_STATIC;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /w14242 /w14254 /w14263 /w14265 /w14287 /w14296 /w14311 /w14545 /w14546 /w14547 /w14549 /w14555 /w14619 /w14640 /w14826 /w14905 /w14906 /w14928</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatSpecificWarningsAsErrors>4289</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;flecs_STATIC;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;flecs_STATIC;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /w14242 /w14254 /w14263 /w14265 /w14287 /w14296 /w14311 /w14545 /w14546 /w14547 /w14549 /w14555 /w14619 /w14640 /w14826 /w14905 /w14906 /w14928</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatSpecificWarningsAsErrors>4289</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;flecs_STATIC;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;flecs_STATIC;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /w14242 /w14254 /w14263 /w14265 /w14287 /w14296 /w14311 /w14545 /w14546 /w14547 /w14549 /w14555 /w14619 /w14640 /w14826 /w14905 /w14906 /w14928</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatSpecificWarningsAsErrors>4289</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;flecs_STATIC;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;flecs_STATIC;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>W:\MIPT\ai_roguelike\3rdParty\flecs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="W:\MIPT\ai_roguelike\3rdParty\flecs\CMakeLists.txt">
+      <StdOutEncoding>UTF-8</StdOutEncoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule W:/MIPT/ai_roguelike/3rdParty/flecs/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SW:/MIPT/ai_roguelike -BW:/MIPT/ai_roguelike/build --check-stamp-file W:/MIPT/ai_roguelike/build/3rdParty/flecs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\GNUInstallDirs.cmake;W:\MIPT\ai_roguelike\3rdParty\flecs\cmake\target_default_compile_options.cmake;W:\MIPT\ai_roguelike\3rdParty\flecs\cmake\target_default_compile_warnings.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">W:\MIPT\ai_roguelike\build\3rdParty\flecs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule W:/MIPT/ai_roguelike/3rdParty/flecs/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SW:/MIPT/ai_roguelike -BW:/MIPT/ai_roguelike/build --check-stamp-file W:/MIPT/ai_roguelike/build/3rdParty/flecs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\GNUInstallDirs.cmake;W:\MIPT\ai_roguelike\3rdParty\flecs\cmake\target_default_compile_options.cmake;W:\MIPT\ai_roguelike\3rdParty\flecs\cmake\target_default_compile_warnings.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">W:\MIPT\ai_roguelike\build\3rdParty\flecs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule W:/MIPT/ai_roguelike/3rdParty/flecs/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SW:/MIPT/ai_roguelike -BW:/MIPT/ai_roguelike/build --check-stamp-file W:/MIPT/ai_roguelike/build/3rdParty/flecs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\GNUInstallDirs.cmake;W:\MIPT\ai_roguelike\3rdParty\flecs\cmake\target_default_compile_options.cmake;W:\MIPT\ai_roguelike\3rdParty\flecs\cmake\target_default_compile_warnings.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">W:\MIPT\ai_roguelike\build\3rdParty\flecs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule W:/MIPT/ai_roguelike/3rdParty/flecs/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SW:/MIPT/ai_roguelike -BW:/MIPT/ai_roguelike/build --check-stamp-file W:/MIPT/ai_roguelike/build/3rdParty/flecs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\GNUInstallDirs.cmake;W:\MIPT\ai_roguelike\3rdParty\flecs\cmake\target_default_compile_options.cmake;W:\MIPT\ai_roguelike\3rdParty\flecs\cmake\target_default_compile_warnings.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">W:\MIPT\ai_roguelike\build\3rdParty\flecs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\app.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\coredoc.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\c_types.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\component.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\entity.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\entity_view.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\flecs.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\impl\iter.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\impl\world.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\invoker.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\iter.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\lifecycle_traits.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\log.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\app\builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\app\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\component\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\doc\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\doc\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\entity\builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\entity\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\enum\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\event\builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\event\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\event\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\filter\builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\filter\builder_i.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\filter\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\filter\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\id\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\id\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\json\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\meta\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\meta\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\module\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\monitor\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\monitor\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\observer\builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\observer\builder_i.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\observer\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\observer\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\pipeline\builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\pipeline\builder_i.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\pipeline\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\pipeline\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\query\builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\query\builder_i.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\query\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\query\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\rest\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\rest\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\rule\builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\rule\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\rule\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\snapshot\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\snapshot\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\system\builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\system\builder_i.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\system\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\system\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\term\builder_i.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\term\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\term\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\timer\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\timer\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\units\decl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\mixins\units\impl.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\pair.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\ref.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\table.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\type.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\utils\array.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\utils\builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\utils\enum.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\utils\function_traits.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\utils\iterable.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\utils\node_builder.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\utils\signature.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\utils\string.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\utils\stringstream.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\utils\utils.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\cpp\world.hpp" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\deprecated.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\doc.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\expr.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\flecs_c.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\flecs_cpp.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\http.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\json.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\log.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\meta.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\meta_c.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\module.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\monitor.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\os_api_impl.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\parser.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\pipeline.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\plecs.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\rest.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\rules.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\snapshot.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\stats.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\system.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\timer.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\addons\units.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\bake_config.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\os_api.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\addons.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\allocator.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\api_defines.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\api_flags.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\api_support.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\api_types.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\bitset.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\block_allocator.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\hashmap.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\map.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\sparse.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\strbuf.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\switch_list.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\vec.h" />
+    <ClInclude Include="W:\MIPT\ai_roguelike\3rdParty\flecs\include\flecs\private\vector.h" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\app.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\coredoc.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\doc.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\expr\deserialize.c">
+      <ObjectFileName>$(IntDir)/src/addons/expr/deserialize.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\expr\serialize.c">
+      <ObjectFileName>$(IntDir)/src/addons/expr/serialize.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\expr\strutil.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\flecs_cpp.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\http.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\json\deserialize.c">
+      <ObjectFileName>$(IntDir)/src/addons/json/deserialize.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\json\json.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\json\serialize.c">
+      <ObjectFileName>$(IntDir)/src/addons/json/serialize.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\json\serialize_type_info.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\log.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\meta\api.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\meta\cursor.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\meta\meta.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\meta\serialized.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\meta_c.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\module.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\monitor.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\os_api_impl\os_api_impl.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\parser.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\pipeline\pipeline.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\pipeline\worker.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\plecs.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\rest.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\rules.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\snapshot.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\stats.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\system\system.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\timer.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\addons\units.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\bootstrap.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\allocator.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\bitset.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\block_allocator.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\hash.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\hashmap.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\map.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\name_index.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\qsort.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\sparse.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\stack_allocator.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\strbuf.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\switch_list.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\vec.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\datastructures\vector.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\entity.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\filter.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\hierarchy.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\id_record.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\iter.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\misc.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\observable.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\observer.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\os_api.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\poly.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\query.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\search.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\stage.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\table.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\table_cache.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\table_graph.c" />
+    <ClCompile Include="W:\MIPT\ai_roguelike\3rdParty\flecs\src\world.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="W:\MIPT\ai_roguelike\build\ZERO_CHECK.vcxproj">
+      <Project>{42B93408-08E2-3657-A636-4C2713276FD7}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
