@@ -53,3 +53,6 @@ CMakeFiles
 CMakeCache.txt
 *.cmake
 compile_commands.json
+w1/
+hw1/x64
+hw1/.vs
