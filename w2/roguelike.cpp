@@ -161,7 +161,7 @@ void init_roguelike(flecs::world &ecs)
   create_minotaur_beh(create_monster(ecs, 10, -5, Color{0xee, 0x00, 0xee, 0xff}, "minotaur_tex"));
   create_minotaur_beh(create_monster(ecs, -5, -5, Color{0x11, 0x11, 0x11, 0xff}, "minotaur_tex"));
   create_minotaur_beh(create_monster(ecs, -5, 5, Color{0, 255, 0, 255}, "minotaur_tex"));
-  create_pickup_monster(create_monster(ecs, -7, -7, Color{0x11, 0x11, 0x11, 0xff}, "minotaur_tex"));
+  create_pickup_monster(create_monster(ecs, -7, -7, Color{0x11, 0x55, 0x11, 0xff}, "minotaur_tex"));
 
   create_player(ecs, 0, 0, "swordsman_tex");
 

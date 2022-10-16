@@ -62,8 +62,7 @@ struct Not : public CompoundNode
         return BEH_SUCCESS;
       if (res == BEH_SUCCESS)
         return BEH_FAIL;
-      if (res == BEH_RUNNING)
-        break;
+      assert(res != BEH_RUNNING);
     }
     return BEH_FAIL;
   }
