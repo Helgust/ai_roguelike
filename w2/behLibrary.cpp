@@ -76,9 +76,7 @@ struct Or: public CompoundNode
     for (BehNode *node : nodes)
     {
       BehResult res = node->update(ecs, entity, bb);
-      if (res == BEH_RUNNING)
-        return res;
-      if(res == BEH_SUCCESS)
+      if (res != BEH_FAIL)
         return res;
     }
     return BEH_FAIL;
