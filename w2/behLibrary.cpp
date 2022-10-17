@@ -96,6 +96,29 @@ struct Parallel: public CompoundNode
   }
 };
 
+struct CheckWaypoint : public BehNode
+{
+  size_t entityWaypointBb = size_t(-1);
+  CheckWaypoint(flecs::entity entity, const char *bb_name)
+    : entityWaypointBb(reg_entity_blackboard_var<flecs::entity>(entity, bb_name)) {}
+
+  BehResult update(flecs::world &, flecs::entity entity, Blackboard &bb) override
+  {
+    entity.set([&](const Position &pos)
+    {
+      flecs::entity waypoint = bb.get<flecs::entity>(entityWaypointBb);
+      waypoint.get([&](const Position &wpos, const Waypoint &nextWaypoint)
+      {
+        if (wpos == pos)
+        {
+          bb.set<flecs::entity>(entityWaypointBb, nextWaypoint.next);
+        }
+      });
+    });
+    return BEH_SUCCESS;
+  }
+};
+
 struct MoveToEntity : public BehNode
 {
   size_t entityBb = size_t(-1); // wraps to 0xff...
@@ -326,3 +349,7 @@ BehNode *find_pick_up(flecs::entity entity, const char *bb_name)
   return new FindPickUp(entity, bb_name);
 }
 
+BehNode *check_waypoint(flecs::entity entity, const char *bb_name)
+{
+  return new CheckWaypoint(entity, bb_name);
+}

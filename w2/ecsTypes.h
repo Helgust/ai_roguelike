@@ -106,10 +106,16 @@ struct Symbol
 struct IsPlayer {};
 struct IsPickUp {};
 struct CanPickUp {};
+struct IsGuard {};
 
 struct Team
 {
   int team = 0;
+};
+
+struct Waypoint
+{
+  flecs::entity next;
 };
 
 struct TextureSource {};
