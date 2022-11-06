@@ -59,3 +59,6 @@ CMakeCache.txt
 *.cmake
 compile_commands.json
 build/*
+w1/
+hw1/x64
+hw1/.vs
