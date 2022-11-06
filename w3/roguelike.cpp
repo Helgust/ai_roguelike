@@ -31,14 +31,16 @@ static void create_randomwalker_beh(flecs::entity e)
         {
           const float enemyDist = bb.get<float>("enemyDist");
           const float baseDist = bb.get<float>("baseDist");
-          return 1.f - std::clamp(baseDist / 10.f + enemyDist / 10.f, 0.f, 1.f);
+          return 1.f - std::clamp(baseDist / 20.f + enemyDist / 20.f, 0.f, 1.f);
         }
       ),
       std::make_pair(
         move_to_base(),
         [](Blackboard &bb)
         {
-          return 0.5f;
+          const float enemyDist = bb.get<float>("enemyDist");
+          const float baseDist = bb.get<float>("baseDist");
+          return std::clamp(-0.25f * enemyDist + 0.5f, 0.5f, 1.f) - std::clamp(-0.25f * baseDist + 1.25f, 0.0f, 0.5f);
         }
       )
       });
@@ -232,9 +234,9 @@ void init_roguelike(flecs::world &ecs)
   register_roguelike_systems(ecs);
 
   ecs.entity("swordsman_tex")
-    .set(Texture2D{LoadTexture("assets/swordsman.png")});
+    .set(Texture2D{LoadTexture("../../../w3/assets/swordsman.png")});
   ecs.entity("minotaur_tex")
-    .set(Texture2D{LoadTexture("assets/minotaur.png")});
+    .set(Texture2D{LoadTexture("../../../w3/assets/minotaur.png")});
 
   ecs.observer<Texture2D>()
     .event(flecs::OnRemove)
@@ -248,6 +250,7 @@ void init_roguelike(flecs::world &ecs)
   // create_fuzzy_monster_beh(create_monster(ecs, -5, -5, Color{0x11, 0x11, 0x11, 0xff}, "minotaur_tex"));
   // create_fuzzy_monster_beh(create_monster(ecs, -5, 5, Color{0, 255, 0, 255}, "minotaur_tex"));
   create_randomwalker_beh(create_monster(ecs, -7, 8, Color{ 0, 255, 0, 255 }, "minotaur_tex"));
+  
 
   create_base(ecs, 2, 2);
 
