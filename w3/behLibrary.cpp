@@ -52,16 +52,26 @@ struct Selector : public CompoundNode
   }
 };
 
-struct UtilitySelector : public BehNode
+struct UtilitySelector : public CompoundNode
 {
-  std::vector<std::pair<BehNode*, utility_function>> utilityNodes;
+  std::vector<utility_function> utilities;
+  std::vector<float> temperature;
+
+
+  UtilitySelector &pushNode(BehNode *node, const utility_function& func)
+  {
+    nodes.push_back(node);
+    utilities.push_back(func);
+    temperature.push_back(0.);
+    return *this;
+  }
 
   BehResult update(flecs::world &ecs, flecs::entity entity, Blackboard &bb) override
   {
     std::vector<std::pair<float, size_t>> utilityScores;
-    for (size_t i = 0; i < utilityNodes.size(); ++i)
+    for (size_t i = 0; i < utilities.size(); ++i)
     {
-      const float utilityScore = utilityNodes[i].second(bb);
+      const float utilityScore = utilities[i](bb) + temperature[i];
       utilityScores.push_back(std::make_pair(utilityScore, i));
     }
     std::sort(utilityScores.begin(), utilityScores.end(), [](auto &lhs, auto &rhs)
@@ -71,12 +81,29 @@ struct UtilitySelector : public BehNode
     for (const std::pair<float, size_t> &node : utilityScores)
     {
       size_t nodeIdx = node.second;
-      BehResult res = utilityNodes[nodeIdx].first->update(ecs, entity, bb);
+      BehResult res = nodes[nodeIdx]->update(ecs, entity, bb);
       if (res != BEH_FAIL)
+      {
+        update_tempearature(nodeIdx);
         return res;
+      }
     }
     return BEH_FAIL;
   }
+  private:
+    float temp_step = 1.0;
+    float cooldown = 0.1;
+    void update_tempearature(size_t nodeIdx) {
+      float prev = temperature[nodeIdx];
+      for(float &t : temperature)
+      {
+        t = 0.0f;
+      }
+      if (prev > 0)
+        temperature[nodeIdx] = prev - cooldown;
+      else
+        temperature[nodeIdx] = prev + temp_step;
+    }
 };
 
 struct MoveToEntity : public BehNode
@@ -108,6 +135,74 @@ struct MoveToEntity : public BehNode
         else
           res = BEH_SUCCESS;
       });
+    });
+    return res;
+  }
+};
+
+
+struct MoveToBase : public BehNode
+{
+  size_t entityBb = size_t(-1); // wraps to 0xff...
+  MoveToBase(flecs::entity entity, const char *bb_name)
+  {
+    entityBb = reg_entity_blackboard_var<flecs::entity>(entity, bb_name);
+  }
+
+  BehResult update(flecs::world &, flecs::entity entity, Blackboard &bb) override
+  {
+    BehResult res = BEH_RUNNING;
+    entity.set([&](Action &a, const Position &pos)
+    {
+      Position target_pos = bb.get<Position>(entityBb);
+        if (pos != target_pos)
+        {
+          a.action = move_towards(pos, target_pos);
+          res = BEH_RUNNING;
+        }
+        else
+          res = BEH_SUCCESS;
+    });
+    return res;
+  }
+};
+
+struct ClosestToEnemy : public BehNode
+{
+  size_t entityBb = size_t(-1); // wraps to 0xff...
+  size_t positionBb = size_t(-1); // wraps to 0xff...
+  float distance = 0;
+  ClosestToEnemy(flecs::entity entity, const char *position_bb_name, const char *enemy_bb_name)
+  {
+    positionBb = reg_entity_blackboard_var<flecs::entity>(entity, position_bb_name);
+    entityBb = reg_entity_blackboard_var<flecs::entity>(entity, enemy_bb_name);
+  }
+
+  BehResult update(flecs::world &ecs, flecs::entity entity, Blackboard &bb) override
+  {
+    BehResult res = BEH_RUNNING;
+    Position pos = bb.get<Position>(positionBb);
+    static auto enemiesQuery = ecs.query<const Position, const Team>();
+    entity.set([&](const Team &t)
+    {
+      flecs::entity closestEnemy;
+      float closestDist = FLT_MAX;
+      enemiesQuery.each([&](flecs::entity enemy, const Position &epos, const Team &et)
+      {
+        if (t.team == et.team)
+          return;
+        float curDist = dist(epos, pos);
+        if (curDist < closestDist)
+        {
+          closestDist = curDist;
+          closestEnemy = enemy;
+        }
+      });
+      if (ecs.is_valid(closestEnemy) && closestDist <= distance)
+      {
+        bb.set<flecs::entity>(entityBb, closestEnemy);
+        res = BEH_SUCCESS;
+      }
     });
     return res;
   }
@@ -244,6 +339,18 @@ struct PatchUp : public BehNode
   }
 };
 
+struct RandomWalk : public BehNode
+{
+  BehResult update(flecs::world &, flecs::entity entity, Blackboard &) override
+  {
+    entity.set([&](Action &a)
+    {
+        a.action = GetRandomValue(EA_MOVE_START, EA_MOVE_END - 1); // do a random walk
+    });
+    return BehResult::BEH_RUNNING;
+  }
+};
+
 
 
 BehNode *sequence(const std::vector<BehNode*> &nodes)
@@ -265,13 +372,20 @@ BehNode *selector(const std::vector<BehNode*> &nodes)
 BehNode *utility_selector(const std::vector<std::pair<BehNode*, utility_function>> &nodes)
 {
   UtilitySelector *usel = new UtilitySelector;
-  usel->utilityNodes = std::move(nodes);
+  for (auto& [node, util] : nodes) {
+    usel->pushNode(node, util);
+  }
   return usel;
 }
 
 BehNode *move_to_entity(flecs::entity entity, const char *bb_name)
 {
   return new MoveToEntity(entity, bb_name);
+}
+
+BehNode *move_to_base(flecs::entity entity, const char *bb_name)
+{
+  return new MoveToBase(entity, bb_name);
 }
 
 BehNode *is_low_hp(float thres)
@@ -299,4 +413,6 @@ BehNode *patch_up(float thres)
   return new PatchUp(thres);
 }
 
-
+BehNode *random_walk() {
+  return new RandomWalk();
+}

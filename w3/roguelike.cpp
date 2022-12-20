@@ -5,6 +5,7 @@
 #include "aiLibrary.h"
 #include "blackboard.h"
 #include "math.h"
+#include "aiUtils.h"
 
 static void create_fuzzy_monster_beh(flecs::entity e)
 {
@@ -53,6 +54,46 @@ static void create_fuzzy_monster_beh(flecs::entity e)
   e.add<WorldInfoGatherer>();
   e.set(BehaviourTree{root});
 }
+
+static void create_horde_beh(flecs::entity e)
+{
+  e.set(Blackboard{});
+  BehNode *root =
+    utility_selector({
+      std::make_pair(
+        sequence({
+          random_walk()
+        }),
+        [](Blackboard &bb)
+        {
+          const float baseDist = bb.get<float>("baseDist");
+          float res = baseDist/10.0f;
+          return 1.0f - std::clamp((res*res), 0.25f, 1.0f);
+        }
+      ),
+      std::make_pair(
+        move_to_base(e, "base_position"),
+        [](Blackboard &bb)
+        {
+          //const float baseDist = bb.get<float>("baseDist");
+          return 0.35f;
+        }
+      ),
+      std::make_pair(
+        sequence({
+          find_enemy(e, 3.f, "attack_enemy"),
+          move_to_entity(e, "attack_enemy")
+        }),
+        [](Blackboard &bb)
+        {
+          const float enemyDist = bb.get<float>("enemyDist");
+          return std::clamp(exp(enemyDist/10.f) - 2.0f, 0.25f, 1.0f);
+        }
+      )
+    });
+  e.add<WorldInfoGatherer>();
+  e.set(BehaviourTree{root});
+};
 
 static void create_minotaur_beh(flecs::entity e)
 {
@@ -124,6 +165,14 @@ static void create_powerup(flecs::world &ecs, int x, int y, float amount)
     .set(Color{0xff, 0xff, 0x00, 0xff});
 }
 
+static void create_base(flecs::world &ecs, int x, int y)
+{
+  ecs.entity()
+    .set(Position{x, y})
+    .add<IsLogical>()
+    .set(Color{0xff, 0xff, 0x00, 0xff});
+}
+
 static void register_roguelike_systems(flecs::world &ecs)
 {
   ecs.system<PlayerInput, Action, const IsPlayer>()
@@ -191,19 +240,30 @@ void init_roguelike(flecs::world &ecs)
         UnloadTexture(texture);
       });
 
-  create_fuzzy_monster_beh(create_monster(ecs, 5, 5, Color{0xee, 0x00, 0xee, 0xff}, "minotaur_tex"));
-  create_fuzzy_monster_beh(create_monster(ecs, 10, -5, Color{0xee, 0x00, 0xee, 0xff}, "minotaur_tex"));
-  create_fuzzy_monster_beh(create_monster(ecs, -5, -5, Color{0x11, 0x11, 0x11, 0xff}, "minotaur_tex"));
-  create_fuzzy_monster_beh(create_monster(ecs, -5, 5, Color{0, 255, 0, 255}, "minotaur_tex"));
+  // create_horde_beh(create_monster(ecs, 5, 5, Color{0xee, 0x00, 0xee, 0xff}, "minotaur_tex"));
+  // create_horde_beh(create_monster(ecs, 10, -5, Color{0xee, 0x00, 0xee, 0xff}, "minotaur_tex"));
+  // create_horde_beh(create_monster(ecs, -5, -5, Color{0x11, 0x11, 0x11, 0xff}, "minotaur_tex"));
+  // create_horde_beh(create_monster(ecs, -5, 5, Color{0, 255, 0, 255}, "minotaur_tex"));
+
+  Position base{-3, -3};
+  create_horde_beh(create_monster(ecs, -4, -4, Color{0xff, 0xff, 0xff, 0xff}, "minotaur_tex"));
+  create_horde_beh(create_monster(ecs, -2, -2, Color{0xff, 0xff, 0xff, 0xff}, "minotaur_tex"));
+  create_horde_beh(create_monster(ecs, -4, -2, Color{0xff, 0xff, 0xff, 0xff}, "minotaur_tex"));
+  create_horde_beh(create_monster(ecs, -2, -4, Color{0xff, 0xff, 0xff, 0xff}, "minotaur_tex"));
+  create_horde_beh(create_monster(ecs, -4, -3, Color{0xff, 0xff, 0xff, 0xff}, "minotaur_tex"));
+  create_horde_beh(create_monster(ecs, -3, -4, Color{0xff, 0xff, 0xff, 0xff}, "minotaur_tex"));
+  create_horde_beh(create_monster(ecs, -3, -2, Color{0xff, 0xff, 0xff, 0xff}, "minotaur_tex"));
+  create_horde_beh(create_monster(ecs, -2, -3, Color{0xff, 0xff, 0xff, 0xff}, "minotaur_tex"));
+  create_base(ecs, base.x, base.y);
 
   create_player(ecs, 0, 0, "swordsman_tex");
 
-  create_powerup(ecs, 7, 7, 10.f);
-  create_powerup(ecs, 10, -6, 10.f);
-  create_powerup(ecs, 10, -4, 10.f);
+  // create_powerup(ecs, 7, 7, 10.f);
+  // create_powerup(ecs, 10, -6, 10.f);
+  // create_powerup(ecs, 10, -4, 10.f);
 
-  create_heal(ecs, -5, -5, 50.f);
-  create_heal(ecs, -5, 5, 50.f);
+  // create_heal(ecs, -5, -5, 50.f);
+  // create_heal(ecs, -5, 5, 50.f);
 
   ecs.entity("world")
     .set(TurnCounter{})
@@ -364,6 +424,8 @@ static void gather_world_info(flecs::world &ecs)
     push_info_to_bb(bb, "hp", hp.hitpoints);
     float numAllies = 0; // note float
     float closestEnemyDist = 100.f;
+    float closestFriendDist = 100.f;
+    Position base = bb.get<Position>("base_position");
     alliesQuery.each([&](const Position &apos, const Team &ateam)
     {
       constexpr float limitDist = 5.f;
@@ -375,9 +437,18 @@ static void gather_world_info(flecs::world &ecs)
         if (enemyDist < closestEnemyDist)
           closestEnemyDist = enemyDist;
       }
+
+      if (team.team == ateam.team)
+      {
+        const float friendDist = dist(pos, apos);
+        if (friendDist < closestFriendDist)
+          closestEnemyDist = friendDist;
+      }
     });
     push_info_to_bb(bb, "alliesNum", numAllies);
     push_info_to_bb(bb, "enemyDist", closestEnemyDist);
+    push_info_to_bb(bb, "friendDist", closestFriendDist);
+    push_info_to_bb(bb, "distToBase", dist(pos, base));
   });
 }
 
