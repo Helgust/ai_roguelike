@@ -442,7 +442,7 @@ static void gather_world_info(flecs::world &ecs)
       {
         const float friendDist = dist(pos, apos);
         if (friendDist < closestFriendDist)
-          closestEnemyDist = friendDist;
+          closestFriendDist = friendDist;
       }
     });
     push_info_to_bb(bb, "alliesNum", numAllies);
